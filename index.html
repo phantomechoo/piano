@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Piano</title>
+</head>
+<body>
+    <div class="turn-warning">
+        <div class="warning-content">
+            🔄 <span>Lütfen en iyi deneyim için telefonunuzu yan çevirin!</span>
+        </div>
+    </div> 
+
+    <div class="piano-container">
+        <div class="piano">
+            <div class="key white" data-note="C"><span>A</span></div>
+            <div class="key black" data-note="Db"><span>W</span></div>
+            
+            <div class="key white" data-note="D"><span>S</span></div>
+            <div class="key black" data-note="Eb"><span>E</span></div>
+            
+            <div class="key white" data-note="E"><span>D</span></div>
+            
+            <div class="key white" data-note="F"><span>F</span></div>
+            <div class="key black" data-note="Gb"><span>T</span></div>
+            
+            <div class="key white" data-note="G"><span>G</span></div>
+            <div class="key black" data-note="Ab"><span>Y</span></div>
+            
+            <div class="key white" data-note="H"><span>H</span></div>
+            <div class="key black" data-note="Bb"><span>U</span></div>
+            
+            <div class="key white" data-note="B"><span>J</span></div>
+        </div>
+
+        <div class="controls">
+            <button id="recordBtn" class="btn">🔴 Kaydet</button>
+            <button id="playBtn" class="btn" disabled>▶️ Dinle</button>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

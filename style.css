@@ -1,0 +1,191 @@
+body {
+    background-color: #f5efe6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+/* piyano gövdesi */
+.piano {
+    display: flex;
+    position: relative;
+    background-color: #1e1e1e;
+    padding: 20px 10px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* tuş tasarımı */
+.key {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: flex-end;
+    justify-self: center;
+    padding-bottom: 15px;
+    box-sizing: border-box;
+    transition: all 0.1s ease;
+}
+
+.key span {
+    font-size: 12px;
+    font-weight: bold;
+    color: #aaa;
+}
+
+.key.white {
+    width: 60px;
+    height: 240px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 0 0 8px 8px;
+    box-shadow: inset 0 -5px 0 #ededed;
+    z-index: 1;
+}
+
+.key.white:active, .key.white.active {
+    background-color: #f0f0f0;
+    box-shadow: 0 -1px 0 #ededed;
+    transform: translateY(4px);
+}
+
+.key.black {
+    width: 36px;
+    height: 150px;
+    background-color: #2c3e50;
+    border-radius: 0 0 4px 4px;
+    box-shadow: inset 0 -5px 0 #1a252f;
+    z-index: 2;
+    position: absolute;
+    margin-left: -18px;
+}
+
+.key[data-note="Db"] { left: 70px; }
+.key[data-note="Eb"] { left: 130px; }
+.key[data-note="Gb"] { left: 250px; }
+.key[data-note="Ab"] { left: 310px; }
+.key[data-note="Bb"] { left: 370px; }
+
+/* SİYAH TUŞA BASILMA EFEKTİ */
+.key.black:active, .key.black.active {
+    background-color: #1a252f;
+    box-shadow: inset 0 -1px 0 #111;
+    transform: translateY(4px);
+}
+
+/* Normalde bu uyarı gizli duracak */
+.turn-warning {
+  display: none;
+}
+
+/* Telefon DİK konumdaysa (Portrait) uyarıyı tam ekran göster, piyanoyu gizle! */
+@media (max-width: 600px) and (orientation: portrait) {
+  .turn-warning {
+    display: flex;
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: #f5efe6;
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    font-weight: bold;
+  }
+  
+  .piano-container {
+    display: none; /* Dik ekranda piyanoyu gizle ki çirkin görünmesin */
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+
+#recordBtn {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+#recordBtn.recording {
+  background-color: #e02424;
+  animation: pulse 1.5s infinite; /* Kayıt yaparken yanıp sönme efekti */
+}
+
+#playBtn {
+  background-color: #4ead7c;
+  color: white;
+}
+
+#playBtn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+
+/* Telefon YAN ÇEVRİLDİĞİNDE (Landscape) çalışacak kodlar */
+@media (max-width: 900px) and (orientation: landscape) {
+  body {
+    background-color: #1a1a1a; /* Yan dönünce odaklanmak için arka planı koyulaştırabiliriz */
+  }
+
+  .piano {
+    width: 90vw;       /* Piyano ekranın %90'ını kaplasın */
+    height: 75vh;      /* Ekran yüksekliğinin %75'ini kaplasın */
+    padding: 15px 10px;
+  }
+
+  .key.white {
+    width: calc(90vw / 7); /* 7 beyaz tuşu ekrana mükemmel şekilde paylaştırır */
+    height: 100%;          /* Piyano gövdesinin tüm yüksekliğini alsın */
+  }
+
+  .key.black {
+    width: 5.5vw;
+    height: 60%;          /* Siyah tuşlar biraz daha kısa olur */
+    margin-left: -2.75vw; /* Siyah tuşu tam ortaya hizalar */
+  }
+
+  /* Yan ekranda siyah tuşların milimetrik yerleşimi */
+  .key[data-note="Db"] { left: 12.8vw; }
+  .key[data-note="Eb"] { left: 25.6vw; }
+  .key[data-note="Gb"] { left: 51.2vw; }
+  .key[data-note="Ab"] { left: 64vw; }
+  .key[data-note="Bb"] { left: 76.8vw; }
+
+  /* Yan dönünce harf göstergelerini tekrar görünür yapıp estetik katalım */
+  .key span {
+    display: block;
+    font-size: 14px;
+    color: #888;
+  }
+
+  .controls {
+    margin-top: 5px;
+  }
+}
